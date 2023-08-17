@@ -1,0 +1,20 @@
+ {{>./layouts/header}}
+
+
+<div class="container p-3 my-3 border">
+	<label class="form-label">내용</label>
+	<textarea class="form-control" name="content" rows="10" style="resize: none; ">
+		
+		{{article}}
+			<!-- 
+				mustache에서 Model 인터페이스 객체에 저장되서 넘어오는 데이터의 사용 범위를 지정한다. 
+			 -->
+			{{#article}} <!-- article 사용 범위 시작 -->
+				{{id}}
+				{{content}}
+			{{/article}} <!-- article 사용 범위 끝 -->
+		</textarea>
+</div>
+
+
+{{>./layouts/footer}}

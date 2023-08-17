@@ -1,0 +1,16 @@
+
+{{>./layouts/header}}
+
+<form class="container p-5" action="/articles/create" method="post">
+	<div class="mb-3">
+		<label class="form-label" onclick="a()">제목</label>
+		<input type="text" class="form-control" name="title">
+	</div>
+	<div class="mb-3">
+		<label class="form-label">내용</label>
+		<textarea class="form-control" name="content" style="resize:none;"></textarea>
+	</div>
+	<button type="submit" class="btn btn-success" >저장</button>
+</form>
+{{>./layouts/footer}}
+	
