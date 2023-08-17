@@ -15,6 +15,7 @@ import lombok.ToString;
 @Setter
 public class ArticleForm {
 	
+	private Long id; //id 필드 추가
 	private String title;
 	private String content;
 	
@@ -38,7 +39,7 @@ public class ArticleForm {
 	
 //	DTO 데이터를 Entity(테이블과 매핑되는 클래스, Article)로 변환하는(객체를 만드는) 메소드
 	public Article toEntity() {
-		return new Article(null, title, content);
+		return new Article(id, title, content);
 	}
 	
 	

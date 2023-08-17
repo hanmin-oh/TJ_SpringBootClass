@@ -50,5 +50,12 @@
 			</div>
 		</nav>
 	</div>
-	<div>
+  	<div class="container p-3 my-3 border">
+  	
+  	{{#msg}}
+  	<div class="alert alert-danger alert-dismissible fade show" role="alert">
+		{{msg}}
+		<button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+	</div>
+	{{/msg}}
 	

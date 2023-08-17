@@ -3,6 +3,7 @@ package com.tjoeun.firstproject.entity;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
 import javax.persistence.Id;
 
 import lombok.AllArgsConstructor;
@@ -26,7 +27,8 @@ public class Article {
 //   기본키로 사용할 필드 선언
 //   기본키를 자동으로 생성하려면 @Id와 @GeneratedValue 어노테이션을 함께 사용해야 한다.
    @Id // 필드를 기본키로 설정한다.
-   @GeneratedValue // 기본키 값을 자동으로 생성한다.
+//   @GeneratedValue
+   @GeneratedValue(strategy = GenerationType.IDENTITY)// 기본키 값을 자동으로 생성한다.
    private Long id;
 //   데이터를 저장할 필드 선언
    @Column // 필드를 테이블 컬럼과 매핑한다.
