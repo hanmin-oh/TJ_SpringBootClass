@@ -13,6 +13,7 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 import com.tjoeun.firstproject.dto.ArticleForm;
 import com.tjoeun.firstproject.entity.Article;
 import com.tjoeun.firstproject.repository.ArticleRepository;
+import com.tjoeun.firstproject.service.ArticleService;
 
 import lombok.extern.slf4j.Slf4j;
 
@@ -23,7 +24,7 @@ public class ArticleController {
 //	JPA repository 인터페이스 객체를 선언하고 @Autowired 어노테이션으로 초기화한다.
 	@Autowired // 스프링 부트가 생성해놓은 객체를 가져다가 자동으로 연결한다.
 	private ArticleRepository articleRepository;
-	
+
 	@GetMapping("/articles/new")
 	public String newArticles(Model model) {
 		return "articles/new";
@@ -51,7 +52,7 @@ public class ArticleController {
 //	{}를 통해서 받은 데이터를 저장할 변수
 	public String show(@PathVariable Long id , Model model) {
 		log.info("show 메소드");
-		log.info("id=" + id);
+//		log.info("id=" + id);
 //		articleRepository의 findById() 메소드로 id에 해당되는 데이터 1건을 테이블에서 가져온다.
 //		 - findById() 메소드로 얻어온 데이터가 없을 경우 orElse() 메소드로 null을 리턴시킨다.
 		Article articleEntity = articleRepository.findById(id).orElse(null);

@@ -26,16 +26,16 @@ public class Article {
 
 //   기본키로 사용할 필드 선언
 //   기본키를 자동으로 생성하려면 @Id와 @GeneratedValue 어노테이션을 함께 사용해야 한다.
-   @Id // 필드를 기본키로 설정한다.
+	@Id // 필드를 기본키로 설정한다.
 //   @GeneratedValue
-   @GeneratedValue(strategy = GenerationType.IDENTITY)// 기본키 값을 자동으로 생성한다.
-   private Long id;
+	@GeneratedValue(strategy = GenerationType.IDENTITY) // 기본키 값을 자동으로 생성한다.
+	private Long id;
 //   데이터를 저장할 필드 선언
-   @Column // 필드를 테이블 컬럼과 매핑한다.
-   private String title;
-   @Column
-   private String content;
-   
+	@Column // 필드를 테이블 컬럼과 매핑한다.
+	private String title;
+	@Column
+	private String content;
+
 	/*
 	 * public Article() { } public Article(Long id, String title, String content) {
 	 * this.id = id; this.title = title; this.content = content; } public Long
@@ -48,11 +48,22 @@ public class Article {
 	 * public String getContent() { return content; }
 	 * 
 	 * public void setContent(String content) { this.content = content; }
+	 * 
+	 * 
+	 * @Override public String toString() { return "Article [id=" + id + ", title="
+	 * + title + ", content=" + content + "]"; }
 	 */
+	
+//	넘어오지 않은 데이터를 기존 데이터로 채워주는 메소드
+	public void patch(Article article) {
+		if (article.title != null) {
+			this.title = article.title;
+		}
+		if (article.content != null) {
+			this.content = article.content;
+		}
+		
+		
+	}
 
-//   @Override
-//   public String toString() {
-//      return "Article [id=" + id + ", title=" + title + ", content=" + content + "]";
-//   }
-   
 }
