@@ -5,7 +5,9 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PatchMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -50,9 +52,26 @@ public class CommentApiController {
 	public ResponseEntity<CommentDTO> create(@PathVariable Long articleId , @RequestBody CommentDTO dto) {
 		System.out.println("============CommentApiConroller의 create() 매소드 실행");
 		System.out.println("================" + articleId + dto.getNickname() + dto.getBody());
-		CommentDTO createDto = commentService.create(dto , articleId);
-		
-		return ResponseEntity.status(HttpStatus.OK).body(createDto);
+		CommentDTO createDTO = commentService.create(dto , articleId);
+		return ResponseEntity.status(HttpStatus.OK).body(createDTO);
 	}
 	
+//	댓글 수정
+	@PatchMapping("/api/comments/{id}")
+	public ResponseEntity<CommentDTO> update(@PathVariable Long id , @RequestBody CommentDTO dto) {
+		System.out.println("============CommentApiConroller의 update() 매소드 실행");
+		System.out.println("================" + id + dto);
+		CommentDTO updateDTO = commentService.update(id , dto);
+		return ResponseEntity.status(HttpStatus.OK).body(updateDTO);
+	}
+	
+//	댓글 삭제
+	@DeleteMapping("/api/comments/{id}")
+	public ResponseEntity<CommentDTO> delete(@PathVariable Long id ){
+		System.out.println("============CommentApiConroller의 delete() 매소드 실행");
+		System.out.println("================" + id);
+		CommentDTO deleteDTO = commentService.delete(id);
+		return ResponseEntity.status(HttpStatus.OK).body(deleteDTO);
+	}
+
 }

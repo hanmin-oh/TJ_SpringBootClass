@@ -11,9 +11,11 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.tjoeun.firstproject.dto.ArticleForm;
+import com.tjoeun.firstproject.dto.CommentDTO;
 import com.tjoeun.firstproject.entity.Article;
 import com.tjoeun.firstproject.repository.ArticleRepository;
 import com.tjoeun.firstproject.service.ArticleService;
+import com.tjoeun.firstproject.service.CommentService;
 
 import lombok.extern.slf4j.Slf4j;
 
@@ -24,7 +26,11 @@ public class ArticleController {
 //	JPA repository 인터페이스 객체를 선언하고 @Autowired 어노테이션으로 초기화한다.
 	@Autowired // 스프링 부트가 생성해놓은 객체를 가져다가 자동으로 연결한다.
 	private ArticleRepository articleRepository;
-
+	
+//	댓글 목록을 가져오기 위해 
+	@Autowired
+	private CommentService commentService;
+	
 	@GetMapping("/articles/new")
 	public String newArticles(Model model) {
 		return "articles/new";
@@ -59,6 +65,10 @@ public class ArticleController {
 		log.info("articleEntity = " + articleEntity);
 //		테이블에서 얻어온 데이터를 뷰페이지로 전달하기 위해 Model 인터페이스 객체에 넣어준다.
 		model.addAttribute("article" , articleEntity);
+		
+//		댓글 목록을 얻어온다. 
+		List<CommentDTO> commentList = commentService.comments(id);
+		model.addAttribute("commentList" , commentList);
 		return "articles/show";
 	}
 	
@@ -106,9 +116,9 @@ public class ArticleController {
 	@GetMapping("/articles/{id}/delete")
 //	RedirectAttributes 인터페이스 객체는 뷰페이지로 1회성 메시지 전달에 사용한다.
 	public String delete (@PathVariable Long id, RedirectAttributes rttr) {
-		System.out.println("delete 메소드");
+		System.out.println("======== ArticleController의 delete 메소드");
 		Article target = articleRepository.findById(id).orElse(null);
-//		log.info("target = " + target);
+		System.out.println("======target : " + target);
 //		데이터를 삭제한다.
 		if(target != null) {
 			articleRepository.delete(target);

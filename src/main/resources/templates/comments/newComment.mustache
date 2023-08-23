@@ -1,0 +1,57 @@
+
+<div class="card mb-3">
+
+	<div class="card-body"></div>
+	<form action="/api/comments/{{id}}/comments" method="post">
+		<div class="mb-3">
+			<label class="form-label" onclick="a()">이름</label> 
+			<input type="text" class="form-control form-control-sm" id="nickname">
+		</div>
+		<div class="mb-3">
+			<label class="form-label">댓글 내용</label>
+			<textarea class="form-control form-control-sm" id="body" style="resize: none;"></textarea>
+		</div>
+		{{#article}}
+		<input type="hidden" id="article-id" name="article-id" value="{{id}}"/>
+		{{/article}}
+	<button type="button" class="btn btn-success" id="comment-create-btn">저장</button>
+	</form>
+
+</div>
+
+<script type="text/javascript">
+{
+	//댓글 저장 버튼을 선택해서 click 이벤트를 걸어준다.
+	const commentCreateBtn = document.querySelector('#comment-create-btn');
+	commentCreateBtn.addEventListener('click' , function() {
+		console.log('저장 버튼이 클릭되었습니다.');
+		// 댓글 javasctipt 객체를 생성한다.
+		const comment = {
+				nickname: document.querySelector('#nickname').value,
+				body: document.querySelector('#body').value,
+				article_id: document.querySelector('#article-id').value			
+		}
+		console.log(comment);
+		console.log(JSON.stringify(comment));
+		
+		//fetch Ajax를 이용해서 REST API를 호출한다.
+		const url = '/api/comments/' + comment.article_id + '/comments';
+		console.log(url);
+		fetch(url, {
+			method: 'POST', // POST 요청
+			body: JSON.stringify(comment),
+			headers: {
+				'Content-Type' : 'application/json'
+			}
+		}).then(function (response) {
+			console.log(response);
+			const msg = response.ok ? '댓글 등록 성공' : '댓글 등록 실패';
+			alert(msg);
+			// 현재 페이지를 새로고침한다.
+			location.reload();
+		});
+	})
+	
+}
+
+</script>

@@ -50,5 +50,20 @@ public class Comment {
 //		entity 생성 및 반환
 		return new Comment(dto.getId(), dto.getNickname(), dto.getBody(), article);
 	}
+
+	public void patch(CommentDTO dto) {
+		System.out.println("*********** CommentEntity의 patch 메소드 실행");
+//		댓글을 수정하기 위해 요청한  id가 데이터베이스에 저장된 id와 다를 경우 예외를 발생시킨다. 
+		if(this.id != dto.getId()) {
+			throw new IllegalArgumentException("댓글 수정 실패! 댓글의 id가 잘못되었습니다.");
+		}
+//		댓글 수정
+		if(dto.getNickname() != null ) {
+			this.nickname = dto.getNickname();
+		}
+		if(dto.getBody() != null) {
+			this.body = dto.getBody();
+		}
+	}
 	
 }

@@ -29,6 +29,10 @@
 <!-- 삭제하기 링크 추가 -->
 <!-- delete 방식으로 처리해야 하지만 지금은 a태그로 처리하고 나중에 js로 처리한다. -->
 <a href="/articles/{{article.id}}/delete" class="btn btn-danger">삭제하기</a>
+<br/><br/>
+<!-- 댓글을 출력하는 영역 -->
+{{>./comments/comments}} 
+
 
 {{>./layouts/footer}}
    
